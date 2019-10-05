@@ -1,4 +1,4 @@
-class Product:
+class Product:                                             (Boris)
   id: Guid
   name: string (must be uniq for all existing products) 
   price: decimal
