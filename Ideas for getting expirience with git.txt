@@ -3,12 +3,23 @@ class Product:
   name: string (must be uniq for all existing products) 
   price: decimal
   expirationDate: DateTime
-  
- class ProductAssorty
-    List<Product> ProductAssorty
-    method setupDummyProducts (add three pre-defined products)
-  
+ 
 class Repository:
-  addProduct()
-  deleteProduct(name)
-  calculateTotalPrice(Dictionary<string,int> purchase)
+    List<Product> ProductAssorty
+    void setupDummyProducts (add three pre-defined products)
+    void addProduct(Product product)
+    void deleteProduct(string name / Guid id)
+
+class UserInteraction
+  decimal calculateTotalPrice(Dictionary<string,int> purchase)
+  Product findProduct(string pattern);
+  bool checkProductExpirationDate(string name)
+
+class Program
+
+2 mode:
+  admin has access to functions from Repository, UserInteraction
+  user has access to functions UserInteraction
+
+
+
