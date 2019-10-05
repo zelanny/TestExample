@@ -8,22 +8,23 @@ namespace ForLearningGit
 {
     class Program
     {
+        static Repository repository;
         static void Main(string[] args)
         {
             string userName = "admin";
 
-            var repository = new Repository();
+            repository = new Repository();
             var userResponse = string.Empty;
 
             while (userResponse != "stop")
             {
-                InteractWithUser(repository, userResponse);
+                InteractWithUser(userResponse);
                 Console.WriteLine("What do you want to do?");
                 userResponse = Console.ReadLine();
             }
         }
 
-        static void InteractWithUser(Repository repository, string userResponse)
+        static void InteractWithUser(string userResponse)
         {
             UserActions action;
 
@@ -43,21 +44,12 @@ namespace ForLearningGit
                 }
                 case UserActions.AddProduct:
                 {
-                    Console.WriteLine("Enter product name");
-                    var name = Console.ReadLine();
-                    Console.WriteLine("Enter price");
-                    var price = decimal.Parse(Console.ReadLine());
-                    repository.AddProduct(new Product(name, price));
+                    AddProduct();
                     break;
                 }
                 case UserActions.DeleteProduct:
                 {
-                    Console.WriteLine("Enter product id/name");
-                    var name = Console.ReadLine();
-                    if (Guid.TryParse(name, out var id))
-                        repository.DeleteProduct(id);
-                    else
-                        repository.DeleteProduct(name);
+                    DeleteProduct();
                     break;
                 }
                 case UserActions.ListAllProducts:
@@ -69,7 +61,30 @@ namespace ForLearningGit
 
                     break;
                 }
+                case UserActions.FindProduct:
+                {
+                    break;
+                }
             }
+        }
+
+        static void AddProduct()
+        {
+            Console.WriteLine("Enter product name");
+            var name = Console.ReadLine();
+            Console.WriteLine("Enter price");
+            var price = decimal.Parse(Console.ReadLine());
+            repository.AddProduct(new Product(name, price));
+        }
+
+        static void DeleteProduct()
+        {
+            Console.WriteLine("Enter product id/name");
+            var name = Console.ReadLine();
+            if (Guid.TryParse(name, out var id))
+                repository.DeleteProduct(id);
+            else
+                repository.DeleteProduct(name);
         }
     }
 
