@@ -28,7 +28,7 @@ namespace ForLearningGit
             if (ProductAssorty.Exists(x => x.name == product.name))
             {
                 throw new ArgumentException("The item with such name is already exist");
-            };
+            }
             ProductAssorty.Add(product);
         }
 
@@ -51,7 +51,7 @@ namespace ForLearningGit
             if (ProductAssorty.Exists(x => x.name == name))
             {
                 throw new ArgumentException("The item with such name is already exist");
-            };
+            }
             ProductAssorty.Add(new Product(name, price, expirationDate));
         }
 
