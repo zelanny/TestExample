@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForLearningGit
 {
-    class Repository
+    public class Repository
     {
         private List<Product> ProductAssorty;
 
@@ -46,18 +46,18 @@ namespace ForLearningGit
             return ProductAssorty.Find(x => x.name == name);
         }
 
-        public void AddProduct(Guid id, string name, decimal price, DateTime expirationDate)
+        public void AddProduct(string name, decimal price, DateTime expirationDate)
         {
             if (ProductAssorty.Exists(x => x.name == name))
             {
                 throw new ArgumentException("The item with such name is already exist");
             };
-            ProductAssorty.Add(new Product(name, price, expirationDate, id));
+            ProductAssorty.Add(new Product(name, price, expirationDate));
         }
 
         public void DeleteProduct(string name)
         {
-            ProductAssorty.Remove(ProductAssorty.Find(x => x.name == name));
+            ProductAssorty.Remove(ProductAssorty.Find(x => string.Equals(x.name, name, StringComparison.CurrentCultureIgnoreCase)));
         }
 
         public void DeleteProduct(Guid id)

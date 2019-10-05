@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForLearningGit
 {
-    class Product
+    public class Product
     {
         public Guid id { get; private set; }
         public string name { get; private set; }
