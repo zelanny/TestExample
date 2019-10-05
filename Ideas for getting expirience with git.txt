@@ -1,0 +1,14 @@
+class Product:
+  id: Guid
+  name: string (must be uniq for all existing products) 
+  price: decimal
+  expirationDate: DateTime
+  
+ class ProductAssorty
+    List<Product> ProductAssorty
+    method setupDummyProducts (add three pre-defined products)
+  
+class Repository:
+  addProduct()
+  deleteProduct(name)
+  calculateTotalPrice(Dictionary<string,int> purchase)
