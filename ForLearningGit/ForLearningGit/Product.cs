@@ -13,12 +13,12 @@ namespace ForLearningGit
         private decimal price;
         private DateTime expirationDate = DateTime.Today;
 
-        public Product(Guid id, string name, decimal price, DateTime expirationDate)
+        public Product(string name, decimal price, DateTime? expirationDate = null, Guid? id = null)
         {
-            this.id = id;
+            this.id = id ?? Guid.NewGuid();
             this.name = name;
             this.price = price;
-            this.expirationDate = expirationDate;
+            this.expirationDate = expirationDate ?? DateTime.Today;
         }
         
     }
