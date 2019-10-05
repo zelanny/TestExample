@@ -10,10 +10,10 @@ namespace ForLearningGit
     {
         public Guid id { get; private set; }
         public string name { get; private set; }
-        private double price;
+        private decimal price;
         private DateTime expirationDate = DateTime.Today;
 
-        public Product(Guid id, string name, double price, DateTime expirationDate)
+        public Product(Guid id, string name, decimal price, DateTime expirationDate)
         {
             this.id = id;
             this.name = name;
