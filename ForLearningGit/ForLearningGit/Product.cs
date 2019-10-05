@@ -8,12 +8,12 @@ namespace ForLearningGit
 {
     class Product
     {
-        private Guid id;
-        private string name;
-        private double price;
-        private DateTime expirationDate = DateTime.Today;
+        Guid id;
+        string name;
+        decimal price;
+        DateTime expirationDate = DateTime.Today;
 
-        public Product(Guid id, string name, double price, DateTime expirationDate)
+        public Product(Guid id, string name, decimal price, DateTime expirationDate)
         {
             this.id = id;
             this.name = name;
