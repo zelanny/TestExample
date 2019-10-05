@@ -16,7 +16,7 @@ namespace ForLearningGit
 
             var listOfAdmins = new Dictionary<string, string>
             {
-                {"Gosha", "777"}, {"Arkasha", "luckystrike"}, {"admin", "1q2w3e4r"}
+                {"Gosha", "777"}, {"Arkasha", "luckystrike"}, {"Deyneris", "drakaris"}, {"admin", "1q2w3e4r"}
             };
 
             Console.WriteLine("Please, enter your Username");
