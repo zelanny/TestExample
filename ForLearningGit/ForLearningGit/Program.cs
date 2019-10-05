@@ -11,38 +11,45 @@ namespace ForLearningGit
         static Repository _repository;
         static void Main(string[] args)
         {
-            var ListOfAdmins = new Dictionary<String, String>();
-            ListOfAdmins.Add("Gosha", "777");
-            ListOfAdmins.Add("Arkasha", "luckystrike");
-            ListOfAdmins.Add("Deineris", "Drakaris");
+
+            _repository = new Repository();
+
+            var listOfAdmins = new Dictionary<string, string>
+            {
+                {"Gosha", "777"}, {"Arkasha", "luckystrike"}, {"admin", "1q2w3e4r"}
+            };
 
             Console.WriteLine("Please, enter your Username");
-            String Answer1 = Console.ReadLine();
-            if (ListOfAdmins.ContainsKey(Answer1))
+            var userName = Console.ReadLine();
+            if (listOfAdmins.ContainsKey(userName))
             {
                 Console.WriteLine("Please, enter your password");
-                for (int i = 0; i < 3; i++)
+                for (var i = 0; i < 3; i++)
                 {
-                    String CheckAdmin = Console.ReadLine();
-                    if (CheckAdmin == ListOfAdmins[Answer1])
+                    var checkAdmin = Console.ReadLine();
+                    if (checkAdmin == listOfAdmins[userName])
                     {
                         break;
                     }
                     if (i == 2)
                     {
                         Console.WriteLine("Username and password did not match. Access denied.");
+                        Console.ReadKey();
                         return;
                     }
                     Console.WriteLine("Password did not match, try again");
                 }
             }
 
-            _repository = new Repository();
             var userResponse = string.Empty;
 
             while (userResponse != "stop")
             {
-                InteractWithUser(userResponse);
+                if (!listOfAdmins.ContainsKey(userName) && Enum.TryParse(userResponse, true, out AdminActions _))
+                    Console.WriteLine("Access to this action is denied");
+                else
+                    InteractWithUser(userResponse);
+
                 Console.WriteLine("What do you want to do?");
                 userResponse = Console.ReadLine();
             }
@@ -54,18 +61,12 @@ namespace ForLearningGit
 
             while (!Enum.TryParse(userResponse, true, out action))
             {
-                Console.WriteLine("Such action is not available");
                 Console.WriteLine("What do you want to do?");
                 userResponse = Console.ReadLine();
             }
 
             switch (action)
             {
-                case UserActions.SetupDummyProducts:
-                {
-                    _repository.SetupDummyProducts();
-                    break;
-                }
                 case UserActions.AddProduct:
                 {
                     AddProduct();
@@ -87,6 +88,7 @@ namespace ForLearningGit
                 }
                 case UserActions.FindProduct:
                 {
+                    FindProductByPattern();
                     break;
                 }
             }
@@ -110,6 +112,20 @@ namespace ForLearningGit
             else
                 _repository.DeleteProduct(name);
         }
+
+        static void FindProductByPattern()
+        {
+            Console.WriteLine("Enter pattern for name");
+            var pattern = Console.ReadLine();
+            var result = _repository.FindProductsByPattern(pattern);
+            if(result.Count == 0)
+                Console.WriteLine("No such products found");
+            else
+                foreach (var item in result)
+                {
+                    Console.WriteLine($"Name: {item.name}");
+                }
+        }
     }
 
     enum UserActions
@@ -118,14 +134,12 @@ namespace ForLearningGit
         FindProduct,
         CheckProductExpirationDate,
         ListAllProducts,
-        SetupDummyProducts,
         AddProduct,
         DeleteProduct
     }
 
     enum AdminActions
     {
-        SetupDummyProducts,
         AddProduct,
         DeleteProduct
     }

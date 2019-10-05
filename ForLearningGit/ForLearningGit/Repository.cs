@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ForLearningGit
 {
-    public class Repository
+    class Repository
     {
         private List<Product> ProductAssorty;
-
 
         public Repository()
         {
             ProductAssorty = new List<Product>();
+            SetupDummyProducts();
         }
 
         public void SetupDummyProducts()
@@ -37,13 +37,9 @@ namespace ForLearningGit
             return ProductAssorty.Select(x => x.name).ToList();
         }
 
-        public Product FindProduct_byName(string name)
+        public List<Product> FindProductsByPattern(string pattern)
         {
-            if (!ProductAssorty.Exists(x => x.name == name))
-            {
-                throw new ArgumentException("The item does not exist");
-            }
-            return ProductAssorty.Find(x => x.name == name);
+            return ProductAssorty.Where(x => x.name.ToLower().Contains(pattern.ToLower())).ToList();
         }
 
         public void AddProduct(string name, decimal price, DateTime expirationDate)
