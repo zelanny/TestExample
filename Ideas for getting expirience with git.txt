@@ -4,7 +4,7 @@ class Product:                                             (Boris)
   price: decimal
   expirationDate: DateTime
  
-class Repository:
+class Repository:                                       (Sir Nick, the Wizard)
     List<Product> ProductAssorty
     void setupDummyProducts (add three pre-defined products)
     void addProduct(Product product)
