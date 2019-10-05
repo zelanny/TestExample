@@ -10,7 +10,7 @@ namespace ForLearningGit
     {
         public Guid id { get; private set; }
         public string name { get; private set; }
-        private decimal price;
+        private double price;
         private DateTime expirationDate = DateTime.Today;
 
         public Product(Guid id, string name, decimal price, DateTime expirationDate)
