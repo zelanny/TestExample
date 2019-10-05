@@ -32,6 +32,15 @@ namespace ForLearningGit
             ProductAssorty.Add(product);
         }
 
+        public Product FindProduct_byName(string name)
+        {
+            if (!ProductAssorty.Exists(x => x.name == name))
+            {
+                throw new ArgumentException("The item does not exist");
+            }
+            return ProductAssorty.Find(x => x.name == name);
+        }
+
         public void AddProduct(Guid id, string name, decimal price, DateTime expirationDate)
         {
             if (ProductAssorty.Exists(x => x.name == name))
